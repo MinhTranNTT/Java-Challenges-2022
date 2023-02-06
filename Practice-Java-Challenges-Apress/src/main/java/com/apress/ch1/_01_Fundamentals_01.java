@@ -1,8 +1,11 @@
 package com.apress.ch1;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class _01_Fundamentals_01 {
 
@@ -33,6 +36,14 @@ public class _01_Fundamentals_01 {
 //		System.out.println(calcPerfectNumbers(6));
 //		System.out.println(calcPerfectNumbers(1000));
 //		System.out.println(calcPerfectNumbers(10000));
+		
+//		System.out.println(removeDuplicates("bananas"));
+//		System.out.println(removeDuplicates("lalalamama"));
+//		System.out.println(removeDuplicates("MICHAEL"));
+		
+		System.out.println(removeDuplicates_v2("bananas"));
+		System.out.println(removeDuplicates_v2("lalalamama"));
+		System.out.println(removeDuplicates_v2("MICHAEL"));
 	}
 
 	/*
@@ -196,11 +207,36 @@ public class _01_Fundamentals_01 {
 	}
 	
 	
+	/*#############################################################################################################*/
 	
+	/*
+	 * Write method String removeDuplicates(String) that keeps each letter only once
+	 * in a given text, thus deleting all subsequent duplicates regardless of case.
+	 * However, the original order of the.
+	 * 
+	 * bananas  	- bans
+	 * lalalamama 	- lam
+	 * MICHAEL 		- MICHAEL
+	 */
 	
+	public static String removeDuplicates(String text) {
+		Set<Character> alreadyExist = new HashSet<>();
+		StringBuilder strBuilder = new StringBuilder();
+		
+		for (int i=0; i<text.length(); i++) {
+			char currentChar = text.charAt(i);
+			if (!alreadyExist.contains(currentChar)) {
+				alreadyExist.add(currentChar);
+				strBuilder.append(currentChar);
+			}
+		}
+		return strBuilder.toString();
+	}
 	
-	
-	
+	// implement
+	public static String removeDuplicates_v2(String text) {
+		return text.chars().distinct().mapToObj(i -> (char) i + "").collect(Collectors.joining());
+	}
 	
 	
 	
